@@ -1,0 +1,13 @@
+{
+  "extends": "@eggjs/tsconfig",
+  "compilerOptions": {
+    "declaration": false,
+    "paths": {
+      "@/module/*": ["app/module/*"],
+      "@/utils/*": ["app/utils/*"]
+    },
+    "baseUrl": ".",
+    "noUnusedLocals": false, /* 检查未使用的变量 */
+    "noUnusedParameters": false,/* 检查未使用的函数参数 */
+  }
+}

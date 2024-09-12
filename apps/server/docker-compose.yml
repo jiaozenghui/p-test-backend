@@ -1,0 +1,37 @@
+version: '3'
+services:
+  p-test-mongo:
+    image: mongo
+    container_name: p-test-mongo
+    volumes:
+      - '.docker-volumes/mongo/data:/data/db' #数据持久化，在主机上的执行文件夹中创建.docker-volumes目录
+      - '$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/'
+    ports:
+      - 27016:27017
+    env_file:
+      - .env
+  p-test-redis:
+    image: redis
+    container_name: p-test-redis
+    command: >  #执行此命令之前的命令
+      redis-server  /usr/local/etc/redis/redis.conf --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - './redis.conf:/usr/local/etc/redis/redis.conf'
+      - '.docker-volumes/redis/data:/data' #数据持久化，在主机上的执行文件夹中创建.docker-volumes目录
+    ports:
+      - 6378:6379
+    env_file:
+      - .env
+  p-test-backend:
+    depends_on:
+      - p-test-mongo
+      - p-test-redis
+    build: 
+      context: . #当前目录
+      dockerfile: Dockerfile #基于Dockerfile构建
+    image: p-test-backend
+    container_name: p-test-backend
+    ports:
+      - 7006:7006
+    env_file:
+      - .env
