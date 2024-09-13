@@ -1,0 +1,19 @@
+name: More Actions Demo
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-lastest
+    steps:
+      - uses: actions/checkout@v2
+      with:
+        repository: 'jiaozenghui/travle-ui'
+      - name: List files in the repo
+        run: |
+          ls ${{ github.workspace }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+      - run: node -v
+      - run: npm install -g typescript
+      - run tsc -v
+      
