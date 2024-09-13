@@ -1,4 +1,4 @@
-FROM node:20-alpine3.20
+FROM node:latest
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY package.json package-lock.json /usr/src/app/
