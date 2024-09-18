@@ -22,6 +22,14 @@ import '@eggjs/tegg-schedule-plugin';
 import '@eggjs/tegg-eventbus-plugin';
 import '@eggjs/tegg-aop-plugin';
 import 'egg-tracer';
+import 'egg-cors';
+import 'egg-mongoose';
+import 'egg-validate';
+import 'egg-bcrypt';
+import 'egg-jwt';
+import 'egg-redis';
+import 'egg-view-nunjucks';
+import 'egg-oss';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -44,5 +52,13 @@ declare module 'egg' {
     eventbusModule?: EggPluginItem;
     aopModule?: EggPluginItem;
     tracer?: EggPluginItem;
+    cors?: EggPluginItem;
+    mongoose?: EggPluginItem;
+    validate?: EggPluginItem;
+    bcrypt?: EggPluginItem;
+    jwt?: EggPluginItem;
+    redis?: EggPluginItem;
+    nunjucks?: EggPluginItem;
+    oss?: EggPluginItem;
   }
 }

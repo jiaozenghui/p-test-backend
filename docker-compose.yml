@@ -17,7 +17,7 @@ services:
       redis-server  /usr/local/etc/redis/redis.conf --requirepass ${REDIS_PASSWORD}
     volumes:
       - './redis.conf:/usr/local/etc/redis/redis.conf'
-      - '.docker-volumes/redis/data:/data' #数据持久化，在主机上的执行文件夹中创建.docker-volumes目录
+      - '.docker-volumes/redis/data:/data' #数据持久化，在主机上的执行文件夹中vvvvvvvvcfffffffff创建.docker-volumes目录
     ports:
       - 6378:6379
     env_file:
