@@ -1,3 +1,12 @@
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+
+
 logs/
 npm-debug.log
 node_modules/
@@ -17,10 +26,3 @@ config/**/*.js
 app/**/*.map
 test/**/*.map
 config/**/*.map
-
-# Local env files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
