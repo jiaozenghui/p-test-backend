@@ -23,7 +23,7 @@ services:
     env_file:
       - .env
   p-test-backend:
-    image: crpi-yacuoj1e11qkasck-vpc.cn-beijing.personal.cr.aliyuncs.com/jiaozenghui/p-test:1.0.0
+    image: crpi-yacuoj1e11qkasck.cn-beijing.personal.cr.aliyuncs.com/jiaozenghui/p-test:1.0.0
     container_name: p-test-backend
     ports:
       - 7006:7006
