@@ -39,7 +39,7 @@ jobs:
           target: "~"
       # 通过 SSH 登录然后重启服务器
       - name: executing ssh and restart docker
-        uses: appleboy/ssh-action@mastar
+        uses: appleboy/ssh-action@master
         with:
           host: ${{secrets.HOST}}
           username: ${{secrets.SSH_USER}}
