@@ -28,6 +28,7 @@ export class HomeController {
       await this.EUtils.ctx.app.mongoose.connection.db.command({
         buildInfo: 1,
       });
+
     this.EUtils.ctx.helper.success({
       res: {
         dbVersion: version,
