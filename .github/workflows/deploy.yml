@@ -21,6 +21,7 @@ jobs:
           echo MONGO_DB_PASSWORD=${{ secrets.MONGO_DB_PASSWORD }} >> .env
           echo REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }} >> .env
           echo REDIS_HOST=${{ secrets.REDIS_HOST }} >> .env
+          echo PING_ENV=${{ secrets.PING_ENV }} >> .env
       # 拷贝必须文件到一个文件夹，包括.env， docker-compose-online.yml， mongo-entrypoint
       - name: "copy necessary files in to one folder"
         run: |
