@@ -19,7 +19,8 @@
     "clean": "tsc -b --clean",
     "build:template:dev": "npx webpack --config webpack/webpack.config.js",
     "build:template:prod": "npx webpack --config webpack/webpack.config.js --env production && npm run upload",
-    "upload": "node webpack/uploadToOSS.js"
+    "upload": "node webpack/uploadToOSS.js",
+    "release": "release-it"
   },
   "dependencies": {
     "@alicloud/dysmsapi20170525": "3.0.0",
@@ -51,7 +52,6 @@
     "lego-components": "^0.1.7",
     "mongoose-sequence": "^6.0.1",
     "nanoid": "^3.3.7",
-    
     "sharp": "^0.33.5",
     "stream-wormhole": "^2.0.1"
   },
@@ -69,6 +69,7 @@
     "filemanager-webpack-plugin": "^8.0.0",
     "html-webpack-plugin": "^5.6.0",
     "mini-css-extract-plugin": "^2.9.1",
+    "release-it": "^17.6.0",
     "typescript": "5",
     "vue": "^3.5.0",
     "webpack": "^5.94.0",
