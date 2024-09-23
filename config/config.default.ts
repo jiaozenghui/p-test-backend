@@ -11,8 +11,8 @@ export default (appInfo: EggAppInfo) => {
   config.middleware = [];
 
   const aliCloudConfig = {
-    accessKeyId: process.env.ALIBABA_CLOUD_ACCESS_KEY_ID,
-    accessKeySecret: process.env.ALIBABA_CLOUD_ACCESS_KEY_SECRET,
+    accessKeyId: process.env.ALC_ACCESS_KEY,
+    accessKeySecret: process.env.ALC_SECRET_KEY,
     endpoint: `dysmsapi.aliyuncs.com`,
   };
   const giteeOauthConfig = {
@@ -104,8 +104,8 @@ export default (appInfo: EggAppInfo) => {
 
   config.oss = {
     client: {
-      accessKeyId: process.env.ALIBABA_CLOUD_ACCESS_KEY_ID || "",
-      accessKeySecret: process.env.ALIBABA_CLOUD_ACCESS_KEY_SECRET || "",
+      accessKeyId: process.env.ALC_ACCESS_KEY || "",
+      accessKeySecret: process.env.ALC_SECRET_KEY || "",
       endpoint: `oss-cn-beijing.aliyuncs.com`,
       bucket: "p-test-ui",
     },
