@@ -180,6 +180,10 @@ export class UtilsController {
   async uploadMultipleFiles() {
     //
     const { fileSize } = this.config.multipart;
+    console.log("9999999999999999");
+    console.log(fileSize);
+    let i = 0;
+
     const parts = this.EUtils.ctx.multipart({
       limits: { fileSize: fileSize as number },
     });
@@ -188,16 +192,19 @@ export class UtilsController {
 
     let part: FileStream | string[];
     while ((part = await parts())) {
+      console.log("888" + i++);
       if (Array.isArray(part)) {
         this.logger.info(part);
       } else {
         try {
+          console.log("ossbegin");
           const savedOSSPath = join(
             "folder-test",
             nanoid(6) + extname(part.filename)
           );
           const result = await this.EUtils.ctx.oss.put(savedOSSPath, part);
           const { url } = result;
+          console.log(result);
           urls.push(url);
           if (part.truncated) {
             await this.EUtils.ctx.oss.delete(savedOSSPath);
