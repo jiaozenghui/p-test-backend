@@ -60,8 +60,7 @@ export default (appInfo: EggAppInfo) => {
         return true;
       }
     },*/
-    match: ["/api/users/current", "/api/works", "/api/utils/upload"],
-    ignore: ["/api/works/list"],
+    ignore: ["/api/works/list", "/auth/"],
   };
   //中间件自带通用项目设置
   //enable：控制中间件是否开启。
