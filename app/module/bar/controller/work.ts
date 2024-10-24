@@ -120,7 +120,6 @@ export class WorkController {
     @HTTPQuery({ name: "title" })
     title: string
   ) {
-    const userId = this.state.user._id;
     const findCondition = {
       isPublic: true,
       isTemplate: true,
