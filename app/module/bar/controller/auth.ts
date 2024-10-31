@@ -118,7 +118,10 @@ export class AuthController {
     if (this.config.env === "prod") {
       const resp = await this.userService.sendSMS(phoneNumber, veriCode);
       if (resp && resp.body?.code !== "OK") {
-        return this.helper.error({ errorType: "sendVeriCodeError" });
+        return this.helper.error({
+          errorType: "sendVeriCodeError",
+          error: resp,
+        });
       }
     }
 

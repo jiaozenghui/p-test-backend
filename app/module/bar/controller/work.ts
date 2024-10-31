@@ -96,7 +96,7 @@ export class WorkController {
 
     const listCondition: IndexCondition = {
       select:
-        "id author copiedCount coverImg desc title user isHot createdAt latestPublishAt status isTemplate channels",
+        "id uuid author copiedCount coverImg desc title user isHot createdAt latestPublishAt status isTemplate channels",
       populate: { path: "user", select: "username nickName, picture" },
       find: findCondition,
       ...(pageIndex && { pageIndex: pageIndex }),
@@ -149,6 +149,16 @@ export class WorkController {
     const res = await this.model.Work.findOneAndUpdate({ id }, body, {
       new: true,
     });
+    this.helper.success({ res });
+  }
+
+  @HTTPMethod({
+    method: HTTPMethodEnum.GET,
+    path: ":id",
+  })
+  @checkPermission("Work", "workNoPermissionFail")
+  async getWork(@HTTPParam({ name: "id" }) id: number) {
+    const res = await this.model.Work.findOne({ id });
     this.helper.success({ res });
   }
 
