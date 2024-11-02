@@ -254,7 +254,7 @@ export class WorkController {
     path: "channels/delete/:id",
   })
   async deleteChannel(@HTTPParam({ name: "id" }) id: number) {
-    const work = await this.model.Work.findByIdAndUpdate(
+    const work = await this.model.Work.findOneAndUpdate(
       { "channels.id": id },
       { $pull: { channels: { id } } },
       { new: true }

@@ -42,7 +42,7 @@ export default (appInfo: EggAppInfo) => {
     //secret: '1234567890',
     aliCloudConfig,
     giteeOauthConfig,
-    H5BaseURL: "http://localhost:7006/api/pages",
+    H5BaseURL: "http://localhost:7006/api/utils",
     baseUrl: "dist.url",
   };
   config.jwt = {
@@ -60,7 +60,7 @@ export default (appInfo: EggAppInfo) => {
         return true;
       }
     },*/
-    ignore: ["/api/works/templist", "/auth/"],
+    ignore: ["/api/works/templist", "/auth/", "/api/utils/"],
   };
   //中间件自带通用项目设置
   //enable：控制中间件是否开启。

@@ -38,7 +38,7 @@ export class UtilsController {
 
   @HTTPMethod({
     method: HTTPMethodEnum.GET,
-    path: "pages/:idAndUuid",
+    path: "p/:idAndUuid",
   })
   async renderH5Page(@HTTPParam({ name: "idAndUuid" }) idAndUuid: string) {
     //ssr render basic demo
