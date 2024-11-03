@@ -239,14 +239,18 @@ export class WorkController {
     @HTTPBody() body
   ) {
     const { name } = body;
-    const res = await this.model.Work.findOneAndUpdate(
+    const work = await this.model.Work.findOneAndUpdate(
       { "channels.id": id },
       {
         $set: { "channels.$.name": name },
       }
     );
 
-    this.helper.success({ res: { name } });
+    if(work) {
+      this.helper.success({res: work})
+    } else {
+      this.helper.error({ errorType: "channelOperateFail" });
+    }
   }
 
   @HTTPMethod({
@@ -259,7 +263,12 @@ export class WorkController {
       { $pull: { channels: { id } } },
       { new: true }
     );
-    this.helper.success({ res: work });
+    if(work) {
+      this.helper.success({res: work})
+    } else {
+      this.helper.error({ errorType: "channelOperateFail" });
+    }
+
   }
   async checkPermission(id: number) {
     const userId = this.state.user_id;

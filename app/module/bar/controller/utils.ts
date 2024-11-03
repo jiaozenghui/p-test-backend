@@ -145,7 +145,8 @@ export class UtilsController {
     const savedOSSPath = join(
       "folder-test",
       nanoid(6) + extname(stream.filename)
-    );
+    ).split(path.sep)
+    .join("/");
     try {
       const result = await this.EUtils.ctx.oss.put(savedOSSPath, stream);
       this.logger.info(result);
@@ -198,10 +199,13 @@ export class UtilsController {
       } else {
         try {
           console.log("ossbegin");
+          
           const savedOSSPath = join(
             "folder-test",
             nanoid(6) + extname(part.filename)
-          );
+          ).split(path.sep)
+          .join("/");
+          console.log(savedOSSPath)
           const result = await this.EUtils.ctx.oss.put(savedOSSPath, part);
           const { url } = result;
           console.log(result);

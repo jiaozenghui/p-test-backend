@@ -84,7 +84,6 @@ export class WorkService {
     const res = await this.model.Work.findOneAndUpdate({ id }, payload, {
       new: true,
     });
-    console.log(res);
     if (res) {
       return `${H5BaseURL}/p/${id}-${res.uuid}`;
     }

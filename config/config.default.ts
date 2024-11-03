@@ -93,7 +93,7 @@ export default (appInfo: EggAppInfo) => {
   };*/
   config.multipart = {
     whitelist: [".png", ".jpg", ".gif", ".webp"],
-    fileSize: "100kb",
+    fileSize: "2048kb",
   };
   config.static = {
     dir: [
