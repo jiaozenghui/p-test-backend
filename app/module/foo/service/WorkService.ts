@@ -13,7 +13,7 @@ import { WorkProps } from "app/model/work";
 import { nanoid } from "nanoid";
 import { createSSRApp } from "vue";
 import { renderToString, renderToNodeStream } from "vue/server-renderer";
-import LegoComponents from "lego-components";
+import PTestComp from "p-test-comp";
 const defaultIndexCondition: Required<IndexCondition> = {
   pageIndex: 0,
   pageSize: 10,
@@ -103,7 +103,7 @@ export class WorkService {
       },
       template: `<final-page  :components="components"></final-page>`,
     });
-    vueApp.use(LegoComponents);
+    vueApp.use(PTestComp);
     const html = await renderToString(vueApp);
     const bodyStyle = this.propsToStyle(content && content.props);
     return {

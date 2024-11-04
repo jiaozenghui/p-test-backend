@@ -49,9 +49,9 @@
     "egg-tracer": "^2.0.0",
     "egg-validate": "^2.0.2",
     "egg-view-nunjucks": "^2.3.0",
-    "lego-components": "^0.1.7",
     "mongoose-sequence": "^6.0.1",
     "nanoid": "^3.3.7",
+    "p-test-comp": "^2.11.0",
     "sharp": "^0.33.5",
     "stream-wormhole": "^2.0.1"
   },

@@ -1,2 +1,3 @@
-import 'lego-components/dist/lego-components.css'
+
+import 'p-test-comp/dist/css/index.css'
 console.log('hello world')
