@@ -67,7 +67,7 @@ export class WorkService {
       .select(select)
       .populate(populate)
       .skip(skip)
-      .limit(skip)
+      .limit(pageSize)
       .sort(customSort)
       .lean();
     const count = await this.model.Work.find(find).countDocuments();

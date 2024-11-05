@@ -121,7 +121,7 @@ export class WorkController {
     title: string
   ) {
     const findCondition = {
-      isPublic: true,
+      // isPublic: true,
       isTemplate: true,
     };
 
@@ -246,8 +246,8 @@ export class WorkController {
       }
     );
 
-    if(work) {
-      this.helper.success({res: work})
+    if (work) {
+      this.helper.success({ res: work });
     } else {
       this.helper.error({ errorType: "channelOperateFail" });
     }
@@ -263,12 +263,11 @@ export class WorkController {
       { $pull: { channels: { id } } },
       { new: true }
     );
-    if(work) {
-      this.helper.success({res: work})
+    if (work) {
+      this.helper.success({ res: work });
     } else {
       this.helper.error({ errorType: "channelOperateFail" });
     }
-
   }
   async checkPermission(id: number) {
     const userId = this.state.user_id;
