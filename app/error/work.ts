@@ -15,6 +15,10 @@ export const WorkErrorMessages = {
     errno: 102004,
     message: "H5作品不存在",
   },
+  workCopyFail: {
+    errno: 102005,
+    message: "作品拷贝失败",
+  },
   workChannelValidateFail: {
     errno: 103001,
     message: "输入信息验证失败",

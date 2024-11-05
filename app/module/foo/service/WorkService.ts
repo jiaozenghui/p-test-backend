@@ -58,6 +58,27 @@ export class WorkService {
     };
     return this.model.Work.create(newEmptyWork);
   }
+  public async copyWork(id){
+    const work = await this.model.Work.findOne({id})
+    if (!work) {
+      throw new Error("work not exists");
+    }
+    const { content } = work
+
+    // 新项目的信息，要符合 WorksModel 属性规则
+    const newData = {
+        title: `${work.title}-复制`,
+        desc: work.desc,
+        coverImg: work.coverImg,
+    }
+    const res = await this.createEmptyWork(newData)
+
+    await this.model.Work.findOneAndUpdate({ id }, {copiedCount: work.copiedCount+1}, {
+      new: true,
+    })
+
+    return res
+  }
   async getList(condition: IndexCondition) {
     const fcondition = { ...defaultIndexCondition, ...condition };
     const { pageIndex, pageSize, select, populate, customSort, find } =

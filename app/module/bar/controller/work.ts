@@ -62,6 +62,8 @@ export class WorkController {
   @Inject()
   @EggQualifier(EggType.CONTEXT)
   EUtils;
+
+
   @HTTPMethod({
     method: HTTPMethodEnum.POST,
     path: "create",
@@ -71,6 +73,21 @@ export class WorkController {
     const workData = await this.workService.createEmptyWork(body);
 
     this.helper.success({ res: workData.toJSON() });
+  }
+
+  @HTTPMethod({
+    method: HTTPMethodEnum.POST,
+    path: "copy/:id",
+  })
+  @checkPermission("Work", "workNoPermissionFail")
+  async copyWork(@HTTPParam({ name: "id" }) id: number,) {
+    const workData = await this.workService.copyWork(id);
+    if (workData) {
+      this.helper.success({ res: workData.toJSON() });
+    } else {
+      this.helper.error({ errorType: "workCopyFail" });
+    }
+    
   }
 
   @HTTPMethod({
