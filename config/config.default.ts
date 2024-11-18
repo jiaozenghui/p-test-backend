@@ -76,7 +76,7 @@ export default (appInfo: EggAppInfo) => {
     saltRounds: 10, // default 10
   };
   config.mongoose = {
-    url: "mongodb://111.229.109.174:27017/egg?replicaSet=rs",
+    url: "mongodb://user:pass@111.229.109.174:27017/egg",
   };
   config.view = {
     mapping: {
