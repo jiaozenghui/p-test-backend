@@ -35,7 +35,7 @@ export default (appInfo: EggAppInfo) => {
       xframe: {
         enable: true,
         // 'SAMEORIGIN', 'DENY' or 'ALLOW-FROM http://example.jp'
-        value: 'ALLOW-FROM http://localhost:8888',
+        value: "ALLOW-FROM http://localhost:8888",
       },
       csrf: {
         enable: false,
@@ -76,7 +76,7 @@ export default (appInfo: EggAppInfo) => {
     saltRounds: 10, // default 10
   };
   config.mongoose = {
-    url: "mongodb://jzh:123456@111.229.109.174:27017/egg",
+    url: "mongodb://111.229.109.174:27017/egg?replicaSet=rs",
   };
   config.view = {
     mapping: {
