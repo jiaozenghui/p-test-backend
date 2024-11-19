@@ -35,7 +35,7 @@ export default (appInfo: EggAppInfo) => {
       xframe: {
         enable: true,
         // 'SAMEORIGIN', 'DENY' or 'ALLOW-FROM http://example.jp'
-        value: 'ALLOW-FROM http://localhost:8888',
+        value: "ALLOW-FROM http://localhost:8888",
       },
       csrf: {
         enable: false,
