@@ -16,7 +16,6 @@ import inputValidate from "app/decorator/inputValidate";
 import checkPermission from "app/decorator/checkPermission";
 import { PopulateOptions } from "mongoose";
 import { nanoid } from "nanoid";
-import { count } from "console";
 
 const workCreateRules = {
   title: "string",

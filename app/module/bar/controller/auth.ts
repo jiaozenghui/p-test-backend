@@ -75,7 +75,8 @@ export class AuthController {
       this.config.jwt.secret,
       {
         expiresIn: 60 * 60,
-      }
+      },
+      
     );
     this.helper.success({ res: { token, user }, msg: "登陆成功" });
   }
