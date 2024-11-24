@@ -77,7 +77,7 @@ export class AuthController {
         expiresIn: 60 * 60,
       }
     );
-    this.helper.success({ res: { token }, msg: "登陆成功" });
+    this.helper.success({ res: { token, user }, msg: "登陆成功" });
   }
 
   @HTTPMethod({
