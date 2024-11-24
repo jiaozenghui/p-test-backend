@@ -1,11 +1,13 @@
 import { UserErrorMessages } from "./user";
 import { WorkErrorMessages } from "./work";
 import { UtilsErrorMessages } from "./utils";
+import { ArticleErrorMessages } from "./article";
 
 export const globalErrorMessages = {
   ...UserErrorMessages,
   ...WorkErrorMessages,
   ...UtilsErrorMessages,
+  ...ArticleErrorMessages
 };
 
 export type GlobalErrorTypes = keyof typeof globalErrorMessages;
