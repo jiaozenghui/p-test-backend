@@ -31,7 +31,7 @@ export default (app: Application) => {
       title: { type: String },
       desc: { type: String },
       coverImg: { type: String },
-      content: { type: Object },
+      content: { type: String },
       isPublic: {
         type: Boolean,
         default: true
