@@ -170,7 +170,7 @@ export class ArticleController {
     method: HTTPMethodEnum.GET,
     path: ":id",
   })
-  @checkPermission("Article", "articleNoPermissionFail")
+  // @checkPermission("Article", "articleNoPermissionFail")
   async getArticle(@HTTPParam({ name: "id" }) id: number) {
     const res = await this.model.Article.findOne({ id });
     this.helper.success({ res });
