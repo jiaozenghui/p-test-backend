@@ -26,6 +26,14 @@ export default function defineRoles(
       can("read", "Channel", { user: user._id });
       can("update", "Channel", ["name"], { user: user._id });
       can("delete", "Channel", ["name"], { user: user._id });
+
+      // articles, 可以创建，然后可以更新和删除自己的article
+      can("create", "Article", ["title", "desc", "content", "coverImg"]);
+      can("read", "Article", { user: user._id });
+      can("update", "Article", ["title", "desc", "content", "coverImg"], {
+        user: user._id,
+      });
+      can("delete", "Article", { user: user._id });
     }
   }
   return build();
