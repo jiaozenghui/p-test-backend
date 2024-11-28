@@ -132,7 +132,11 @@ export class ArticleController {
     @HTTPQuery({ name: "isPublic" })
     isPublic: boolean,
     @HTTPQuery({ name: "title" })
-    title: string
+    title:string,
+    @HTTPQuery({ name: "SortKey" })
+    SortKey:string,
+    @HTTPQuery({ name: "customSort" })
+    customSort: string
   ) {
     const findCondition = {
       // isPublic: true,
@@ -141,9 +145,10 @@ export class ArticleController {
 
     const listCondition: IndexCondition = {
       select:
-        "id author copiedCount coverImg desc title user isHot createdAt latestPublishAt status isPublic channels",
+        "id author copiedCount likeCount coverImg desc title user isHot createdAt latestPublishAt status isPublic category tags",
       populate: { path: "user", select: "username nickName, picture" },
       find: findCondition,
+      ...(SortKey?{customSort: {[SortKey]: customSort==='dsc'? -1: 0}}: {}),
       ...(pageIndex && { pageIndex: pageIndex }),
       ...(pageSize && { pageSize: pageSize }),
     };
@@ -167,12 +172,40 @@ export class ArticleController {
   }
 
   @HTTPMethod({
+    method: HTTPMethodEnum.PATCH,
+    path: "change/:countField/:id",
+  })
+  async upArticleViewCount(
+    @HTTPParam({ name: "id" }) id: number,
+    @HTTPParam({ name: "countField" }) countField: string
+  ) {
+    const res = await this.model.Article.findOneAndUpdate({ id }, { $inc: { [countField]: 1 } }, {
+      new: true,
+    });
+    this.helper.success({ res });
+  }
+
+  @HTTPMethod({
     method: HTTPMethodEnum.GET,
     path: ":id",
   })
   // @checkPermission("Article", "articleNoPermissionFail")
-  async getArticle(@HTTPParam({ name: "id" }) id: number) {
-    const res = await this.model.Article.findOne({ id });
+  async getArticle(
+    @HTTPParam({ name: "id" }) id: number,
+    @HTTPQuery({ name: "update" })
+    update: string
+  ) {
+    let res = await this.model.Article.findOne({ id });
+    if (update === "view" && res) {
+      console.log('sfds666666666666666666')
+      res = await this.model.Article.findOneAndUpdate(
+        { id },
+        { viewCount: ++res.viewCount },
+        {
+          new: true,
+        }
+      );
+    }
     this.helper.success({ res });
   }
 

@@ -17,7 +17,8 @@ export interface ArticleProps {
   latestPublishAt: Date;
   likeCount: number;
   viewCount:number;
-  category: string
+  category: string,
+  tags: string
 }
 
 
@@ -44,7 +45,8 @@ export default (app: Application) => {
       status: { type: Number, default: 0 },
       user: { type: Schema.Types.ObjectId, ref: "User" },
       latestPublishAt: { type: Date },
-      category: {type: String}
+      category: {type: String},
+      tags: {type: String}
     },
     {
       timestamps: true,
