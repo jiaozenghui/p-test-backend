@@ -138,7 +138,7 @@ export class ArticleController {
       // isPublic: true,
       isPublic: true,
     };
-
+    console.log("99999999999999999999999999999");
     const listCondition: IndexCondition = {
       select:
         "id author copiedCount coverImg desc title user isHot createdAt latestPublishAt status isPublic channels",
@@ -147,6 +147,7 @@ export class ArticleController {
       ...(pageIndex && { pageIndex: pageIndex }),
       ...(pageSize && { pageSize: pageSize }),
     };
+    console.log(pageSize);
     const res = await this.articleService.getList(listCondition);
     this.helper.success({ res });
   }
@@ -170,7 +171,6 @@ export class ArticleController {
     method: HTTPMethodEnum.GET,
     path: ":id",
   })
-  @checkPermission("Article", "articleNoPermissionFail")
   async getArticle(@HTTPParam({ name: "id" }) id: number) {
     const res = await this.model.Article.findOne({ id });
     this.helper.success({ res });
