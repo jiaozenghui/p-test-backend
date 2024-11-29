@@ -132,7 +132,11 @@ export class ArticleController {
     @HTTPQuery({ name: "isPublic" })
     isPublic: boolean,
     @HTTPQuery({ name: "title" })
-    title: string
+    title: string,
+    @HTTPQuery({ name: "SortKey" })
+    SortKey: string,
+    @HTTPQuery({ name: "customSort" })
+    customSort: string
   ) {
     const findCondition = {
       // isPublic: true,
@@ -141,9 +145,12 @@ export class ArticleController {
     console.log("99999999999999999999999999999");
     const listCondition: IndexCondition = {
       select:
-        "id author copiedCount coverImg desc title user isHot createdAt latestPublishAt status isPublic channels",
+        "id author copiedCount likeCount coverImg desc title user isHot createdAt latestPublishAt status isPublic category tags",
       populate: { path: "user", select: "username nickName, picture" },
       find: findCondition,
+      ...(SortKey
+        ? { customSort: { [SortKey]: customSort === "dsc" ? -1 : 0 } }
+        : {}),
       ...(pageIndex && { pageIndex: pageIndex }),
       ...(pageSize && { pageSize: pageSize }),
     };
@@ -168,11 +175,45 @@ export class ArticleController {
   }
 
   @HTTPMethod({
+    method: HTTPMethodEnum.PATCH,
+    path: "change/:countField/:id",
+  })
+  async upArticleViewCount(
+    @HTTPParam({ name: "id" }) id: number,
+    @HTTPParam({ name: "countField" }) countField: string
+  ) {
+    const res = await this.model.Article.findOneAndUpdate(
+      { id },
+      { $inc: { [countField]: 1 } },
+      {
+        new: true,
+      }
+    );
+    this.helper.success({ res });
+  }
+
+  @HTTPMethod({
     method: HTTPMethodEnum.GET,
     path: ":id",
   })
-  async getArticle(@HTTPParam({ name: "id" }) id: number) {
-    const res = await this.model.Article.findOne({ id });
+  // @checkPermission("Article", "articleNoPermissionFail")
+  async getArticle(
+    @HTTPParam({ name: "id" }) id: number,
+    @HTTPQuery({ name: "update" })
+    update: string
+  ) {
+    let res: any;
+    if (update === "view") {
+      res = await this.model.Article.findOneAndUpdate(
+        { id },
+        { $inc: { ["viewCount"]: 1 } },
+        {
+          new: true,
+        }
+      );
+    } else {
+      res = await this.model.Article.findOne({ id });
+    }
     this.helper.success({ res });
   }
 
