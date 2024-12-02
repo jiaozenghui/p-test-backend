@@ -181,8 +181,7 @@ export class UtilsController {
   async uploadMultipleFiles() {
     //
     const { fileSize } = this.config.multipart;
-    console.log("9999999999999999");
-    console.log(fileSize);
+
     let i = 0;
 
     const parts = this.EUtils.ctx.multipart({
@@ -193,7 +192,7 @@ export class UtilsController {
 
     let part: FileStream | string[];
     while ((part = await parts())) {
-      console.log("888" + i++);
+
       if (Array.isArray(part)) {
         this.logger.info(part);
       } else {

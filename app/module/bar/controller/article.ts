@@ -142,7 +142,6 @@ export class ArticleController {
       // isPublic: true,
       isPublic: true,
     };
-    console.log("99999999999999999999999999999");
     const listCondition: IndexCondition = {
       select:
         "id author copiedCount likeCount coverImg desc title user isHot createdAt latestPublishAt status isPublic category tags",
@@ -154,7 +153,6 @@ export class ArticleController {
       ...(pageIndex && { pageIndex: pageIndex }),
       ...(pageSize && { pageSize: pageSize }),
     };
-    console.log(pageSize);
     const res = await this.articleService.getList(listCondition);
     this.helper.success({ res });
   }

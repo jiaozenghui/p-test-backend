@@ -74,7 +74,7 @@ export class AuthController {
       { username: user.username, _id: user._id },
       this.config.jwt.secret,
       {
-        expiresIn: 60 * 60,
+        expiresIn: 60,
       },
       
     );
@@ -153,12 +153,10 @@ export class AuthController {
     try {
       const token = await this.userService.loginByGitee(code);
       if (token) {
-        console.log("test++++++++++++++");
         await this.EUtils.render("success.nj", { token });
         //this.helper.success({ res: { token } });
       }
     } catch (error) {
-      console.log(error);
       return this.helper.error({ errorType: "giteeOauthError" });
     }
   }

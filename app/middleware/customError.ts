@@ -5,7 +5,6 @@ module.exports = () => {
       await next();
     } catch (e) {
       const error = e as any;
-      console.log(error);
       if (error && error.status === 401) {
         return ctx.helper.error({ errorType: "loginValidateFail" });
       } else if (ctx.path.startsWith("/api/utils/upload")) {
