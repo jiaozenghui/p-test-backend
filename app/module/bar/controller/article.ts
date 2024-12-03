@@ -131,8 +131,8 @@ export class ArticleController {
     pageSize: number,
     @HTTPQuery({ name: "isPublic" })
     isPublic: boolean,
-    @HTTPQuery({ name: "title" })
-    title: string,
+    @HTTPQuery({ name: "category" })
+    category: string,
     @HTTPQuery({ name: "SortKey" })
     SortKey: string,
     @HTTPQuery({ name: "customSort" })
@@ -140,6 +140,7 @@ export class ArticleController {
   ) {
     const findCondition = {
       // isPublic: true,
+      ...(category?{category: category}:{}),
       isPublic: true,
     };
     const listCondition: IndexCondition = {
