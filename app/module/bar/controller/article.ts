@@ -124,7 +124,7 @@ export class ArticleController {
     method: HTTPMethodEnum.GET,
     path: "list",
   })
-  async tempList(
+  async artList(
     @HTTPQuery({ name: "pageIndex" })
     pageIndex: number,
     @HTTPQuery({ name: "pageSize" })
@@ -136,13 +136,33 @@ export class ArticleController {
     @HTTPQuery({ name: "SortKey" })
     SortKey: string,
     @HTTPQuery({ name: "customSort" })
-    customSort: string
+    customSort: string,
+    @HTTPQuery({ name: "query" })
+    query: string,
+    @HTTPQuery({ name: "tags" })
+    tags: string
   ) {
+    const pattern = !!query ? { $regex: query, $options: "i" } : null;
+    let likeCondition = {};
+    if (pattern) {
+      likeCondition = {
+        $or: [
+          { title: pattern },
+          { content: pattern },
+          { desc: pattern },
+          { tags: pattern },
+        ],
+      };
+    }
+
     const findCondition = {
       // isPublic: true,
-      ...(category?{category: category}:{}),
+      ...(category ? { category: category } : {}),
+      ...(pattern ? likeCondition : {}),
+      ...(!!tags ? { tags: { $regex: tags, $options: "i" } } : {}),
       isPublic: true,
     };
+    console.log(findCondition);
     const listCondition: IndexCondition = {
       select:
         "id author copiedCount likeCount coverImg desc title user isHot createdAt latestPublishAt status isPublic category tags",
