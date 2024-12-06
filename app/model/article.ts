@@ -18,7 +18,14 @@ export interface ArticleProps {
   likeCount: number;
   viewCount:number;
   category: string,
-  tags: string
+  tags: string,
+  anchors?: Anchor[],
+}
+
+declare interface Anchor {
+  id: string,
+  type: string,
+  text: string
 }
 
 
@@ -46,7 +53,8 @@ export default (app: Application) => {
       user: { type: Schema.Types.ObjectId, ref: "User" },
       latestPublishAt: { type: Date },
       category: {type: String},
-      tags: {type: String}
+      tags: {type: String},
+      anchors: { type: Array },
     },
     {
       timestamps: true,

@@ -73,9 +73,9 @@ export class AuthController {
     const token = this.jwt.sign(
       { username: user.username, _id: user._id },
       this.config.jwt.secret,
-      {
-        expiresIn: 60,
-      },
+      // {
+      //   expiresIn: 60,
+      // },
       
     );
     this.helper.success({ res: { token, user }, msg: "登陆成功" });
