@@ -162,7 +162,6 @@ export class ArticleController {
       ...(!!tags ? { tags: { $regex: tags, $options: "i" } } : {}),
       isPublic: true,
     };
-    console.log(findCondition);
     const listCondition: IndexCondition = {
       select:
         "id author copiedCount likeCount coverImg desc title user isHot createdAt latestPublishAt status isPublic category tags",

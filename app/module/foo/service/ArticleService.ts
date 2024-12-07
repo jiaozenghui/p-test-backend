@@ -48,12 +48,12 @@ export class ArticleService {
   @EggQualifier(EggType.CONTEXT)
   state;
   public async createEmptyArticle(payload) {
-    const { username, _id } = this.state.user;
+    const { nickName, _id } = this.state.user;
     const uuid = nanoid(6);
     const newEmptyArticle: Partial<ArticleProps> = {
       ...payload,
       user: new Types.ObjectId(_id),
-      author: username,
+      author: nickName,
       uuid,
     };
     return this.model.Article.create(newEmptyArticle);

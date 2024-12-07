@@ -196,18 +196,14 @@ export class UtilsController {
       if (Array.isArray(part)) {
         this.logger.info(part);
       } else {
-        try {
-          console.log("ossbegin");
-          
+        try {         
           const savedOSSPath = join(
             "folder-test",
             nanoid(6) + extname(part.filename)
           ).split(path.sep)
           .join("/");
-          console.log(savedOSSPath)
           const result = await this.EUtils.ctx.oss.put(savedOSSPath, part);
           const { url } = result;
-          console.log(result);
           urls.push(url);
           if (part.truncated) {
             await this.EUtils.ctx.oss.delete(savedOSSPath);
