@@ -1,7 +1,4 @@
 version: '3'
-networks:
-  blog_bridge_network:
-    driver: bridge
 services:
   p-test-mongo:
     image: mongo
@@ -34,3 +31,6 @@ services:
       - 7006:7006
     env_file:
       - .env
+networks:
+  blog_bridge_network:
+    external: true

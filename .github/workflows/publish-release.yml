@@ -76,6 +76,7 @@ jobs:
           # 停止服务 docker-compose down
           # 清理工作
           script: |
+            docker network create blog_network_bridge
             docker login --username ${{secrets.ACR_USERNAME}} --password=${{secrets.ACR_PASSWORD}} crpi-yacuoj1e11qkasck.cn-beijing.personal.cr.aliyuncs.com
             cd ~/p-test-back-server/
             docker-compose -f docker-compose-online.yml down
