@@ -78,7 +78,7 @@ jobs:
           script: |
             docker login --username ${{secrets.ACR_USERNAME}} --password=${{secrets.ACR_PASSWORD}} crpi-yacuoj1e11qkasck.cn-beijing.personal.cr.aliyuncs.com
             cd ~/p-test-back-server/
-            docker-compose -f docker-compose-online.yml down
-            docker-compose -f docker-compose-online.yml up -d
+            docker compose -f docker-compose-online.yml down
+            docker compose -f docker-compose-online.yml up -d
             rm -rf .env
             docker logout crpi-yacuoj1e11qkasck.cn-beijing.personal.cr.aliyuncs.com
