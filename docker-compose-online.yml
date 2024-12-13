@@ -2,6 +2,7 @@ version: '3'
 services:
   p-test-mongo:
     image: mongo
+    command: mongod --wiredTigerEngineConfigString "log=(prealloc=false)"
     container_name: p-test-mongo
     volumes:
       - '.docker-volumes/mongo/data:/data/db' #数据持久化，在主机上的执行文件夹中创建.docker-volumes目录
