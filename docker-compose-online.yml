@@ -11,7 +11,7 @@ services:
     env_file:
       - .env
     networks:
-      - blog_networks
+      - mynet
   p-test-redis:
     image: redis
     container_name: p-test-redis
@@ -25,7 +25,7 @@ services:
     env_file:
       - .env
     networks:
-      - blog_networks
+      - mynet
   p-test-backend:
     image: crpi-yacuoj1e11qkasck.cn-beijing.personal.cr.aliyuncs.com/jiaozenghui/p-test:{{tag}}
     container_name: p-test-backend
@@ -34,8 +34,9 @@ services:
     env_file:
       - .env
     networks:
-      - blog_networks
+      - mynet
 
-networks:
-  blog_networks:
-    external: true
+networks:  #定义网络
+  mynet:   # compose中网络名称
+    name: mynet  # 实际docker中网络名称 docker network ls 查看的名称
+    driver: bridge  # 网络名称
