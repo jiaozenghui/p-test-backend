@@ -1,6 +1,6 @@
 {
   "name": "@p-test-backend/server",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "p-test-cli backend server",
   "private": true,
   "egg": {
