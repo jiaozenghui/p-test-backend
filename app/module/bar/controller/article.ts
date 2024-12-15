@@ -31,10 +31,12 @@ export interface IndexCondition {
   find?: Record<string, any>;
 }
 
-type ArticleDetails = ArticleProps & {
-  prev?: {id: number, title: string},
-  next?: {id: number, title: string}
-} | null
+type ArticleDetails =
+  | (ArticleProps & {
+      prev?: { id: number; title: string };
+      next?: { id: number; title: string };
+    })
+  | null;
 
 @HTTPController({
   path: "/api/articles",
@@ -222,13 +224,12 @@ export class ArticleController {
   async getArticle(
     @HTTPParam({ name: "id" }) id: number,
     @HTTPQuery({ name: "update" })
-    update: string 
+    update: string
   ) {
     let res: ArticleDetails;
     if (update === "view") {
-      
-      const nextq = {id: {$gt: id}};
-      const prevq = {id: {$lt: id}};
+      const prevq = { id: { $gt: id } };
+      const nextq = { id: { $lt: id } };
       res = await this.model.Article.findOneAndUpdate(
         { id },
         { $inc: { ["viewCount"]: 1 } },
@@ -236,11 +237,15 @@ export class ArticleController {
           new: true,
         }
       ).lean();
-      const prev = await this.model.Article.findOne(prevq).sort({id: -1 }).limit(1)
-      const next = await this.model.Article.findOne(nextq).sort({id: 1 }).limit(1)
+      const prev = await this.model.Article.findOne(prevq)
+        .sort({ id: 1 })
+        .limit(1);
+      const next = await this.model.Article.findOne(nextq)
+        .sort({ id: -1 })
+        .limit(1);
       if (res) {
-        prev&&(res.prev = {id: prev?.id, title: prev?.title})
-        next&&(res.next = {id: next?.id, title: next?.title})
+        prev && (res.prev = { id: prev?.id, title: prev?.title });
+        next && (res.next = { id: next?.id, title: next?.title });
       }
     } else {
       res = await this.model.Article.findOne({ id });
