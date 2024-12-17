@@ -19,7 +19,7 @@ const defaultIndexCondition: Required<IndexCondition> = {
   pageSize: 10,
   select: "",
   populate: { path: "" },
-  customSort: { latestPublishAt: -1 },
+  customSort: { id: -1 },
   find: {},
 };
 
