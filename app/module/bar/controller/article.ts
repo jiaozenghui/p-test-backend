@@ -218,7 +218,7 @@ export class ArticleController {
   async getArticle(
     @HTTPParam({ name: "id" }) id: number,
     @HTTPQuery({ name: "update" })
-    update: string 
+    update: string
   ) {
     let res: any;
     if (update === "view") {
@@ -227,12 +227,13 @@ export class ArticleController {
       const sortDesc = { sortField: -1 };
       res = await this.model.Article.findOneAndUpdate(
         { id },
-        { $inc: { ["viewCount"]: 1 } },
         {
           new: true,
         }
       );
-      const prev = await this.model.Article.findOne(query).sort(sortDesc).limit(1)
+      const prev = await this.model.Article.findOne(query)
+        .sort(sortDesc)
+        .limit(1);
     } else {
       res = await this.model.Article.findOne({ id });
     }

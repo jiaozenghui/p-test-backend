@@ -19,7 +19,7 @@ const defaultIndexCondition: Required<IndexCondition> = {
   pageSize: 10,
   select: "",
   populate: { path: "" },
-  customSort: { createdAt: -1 },
+  customSort: { latestPublishAt: -1 },
   find: {},
 };
 
@@ -58,26 +58,30 @@ export class ArticleService {
     };
     return this.model.Article.create(newEmptyArticle);
   }
-  public async copyArticle(id){
-    const article = await this.model.Article.findOne({id})
+  public async copyArticle(id) {
+    const article = await this.model.Article.findOne({ id });
     if (!article) {
       throw new Error("article not exists");
     }
-    const { content } = article
+    const { content } = article;
 
     // 新项目的信息，要符合 ArticlesModel 属性规则
     const newData = {
-        title: `${article.title}-复制`,
-        desc: article.desc,
-        coverImg: article.coverImg,
-    }
-    const res = await this.createEmptyArticle(newData)
+      title: `${article.title}-复制`,
+      desc: article.desc,
+      coverImg: article.coverImg,
+    };
+    const res = await this.createEmptyArticle(newData);
 
-    await this.model.Article.findOneAndUpdate({ id }, {copiedCount: article.copiedCount+1}, {
-      new: true,
-    })
+    await this.model.Article.findOneAndUpdate(
+      { id },
+      { copiedCount: article.copiedCount + 1 },
+      {
+        new: true,
+      }
+    );
 
-    return res
+    return res;
   }
   async getList(condition: IndexCondition) {
     const fcondition = { ...defaultIndexCondition, ...condition };
@@ -110,7 +114,6 @@ export class ArticleService {
     }
     return null;
   }
-
 
   propsToStyle(props = {}) {
     const keys = Object.keys(props);
