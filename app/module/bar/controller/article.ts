@@ -232,7 +232,6 @@ export class ArticleController {
       const nextq = { id: { $lt: id } };
       res = await this.model.Article.findOneAndUpdate(
         { id },
-        { $inc: { ["viewCount"]: 1 } },
         {
           new: true,
         }
