@@ -235,12 +235,6 @@ export class ArticleController {
         {
           new: true,
         }
-<<<<<<< HEAD
-      );
-      const prev = await this.model.Article.findOne(query)
-        .sort(sortDesc)
-        .limit(1);
-=======
       ).lean();
       const prev = await this.model.Article.findOne(prevq)
         .sort({ id: 1 })
@@ -252,7 +246,6 @@ export class ArticleController {
         prev && (res.prev = { id: prev?.id, title: prev?.title });
         next && (res.next = { id: next?.id, title: next?.title });
       }
->>>>>>> 9349c6b0a17ad90429bf162821a4a5513b6c3f4f
     } else {
       res = await this.model.Article.findOne({ id });
     }
