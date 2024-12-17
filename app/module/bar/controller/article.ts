@@ -15,7 +15,6 @@ import { ArticleProps } from "app/model/article";
 import inputValidate from "app/decorator/inputValidate";
 import checkPermission from "app/decorator/checkPermission";
 import { PopulateOptions } from "mongoose";
-import { nanoid } from "nanoid";
 
 const articleCreateRules = {
   title: "string",
@@ -31,6 +30,13 @@ export interface IndexCondition {
   customSort?: Record<string, any>;
   find?: Record<string, any>;
 }
+
+type ArticleDetails =
+  | (ArticleProps & {
+      prev?: { id: number; title: string };
+      next?: { id: number; title: string };
+    })
+  | null;
 
 @HTTPController({
   path: "/api/articles",
@@ -220,20 +226,33 @@ export class ArticleController {
     @HTTPQuery({ name: "update" })
     update: string
   ) {
-    let res: any;
+    let res: ArticleDetails;
     if (update === "view") {
-      const query = { id };
-      const sortAsc = { sortField: 1 };
-      const sortDesc = { sortField: -1 };
+      const prevq = { id: { $gt: id } };
+      const nextq = { id: { $lt: id } };
       res = await this.model.Article.findOneAndUpdate(
         { id },
         {
           new: true,
         }
+<<<<<<< HEAD
       );
       const prev = await this.model.Article.findOne(query)
         .sort(sortDesc)
         .limit(1);
+=======
+      ).lean();
+      const prev = await this.model.Article.findOne(prevq)
+        .sort({ id: 1 })
+        .limit(1);
+      const next = await this.model.Article.findOne(nextq)
+        .sort({ id: -1 })
+        .limit(1);
+      if (res) {
+        prev && (res.prev = { id: prev?.id, title: prev?.title });
+        next && (res.next = { id: next?.id, title: next?.title });
+      }
+>>>>>>> 9349c6b0a17ad90429bf162821a4a5513b6c3f4f
     } else {
       res = await this.model.Article.findOne({ id });
     }

@@ -78,7 +78,7 @@ export default (appInfo: EggAppInfo) => {
     saltRounds: 10, // default 10
   };
   config.mongoose = {
-    url: "mongodb://user:pass@111.229.109.174:27017/egg",
+    url: "mongodb://user:pass@111.229.109.174:27016/egg",
   };
   config.view = {
     mapping: {
@@ -88,7 +88,7 @@ export default (appInfo: EggAppInfo) => {
   };
   config.redis = {
     client: {
-      port: 6379, // Redis port
+      port: 6378, // Redis port
       host: process.env.REDIS_HOST, // Redis host
       password: process.env.REDIS_PASSWORD,
       db: 0,
