@@ -14,12 +14,6 @@ open http://localhost:7006/
 
 Don't tsc compile at development mode, if you had run `tsc` then you need to `npm run clean` before `npm run dev`.
 
-### 提交
-
-```bash
-npm run commit
-
-```
 
 ### CICD
 
