@@ -9,16 +9,23 @@
 ```bash
 npm i
 npm run dev
-open http://localhost:7002/
+open http://localhost:7006/
 ```
 
 Don't tsc compile at development mode, if you had run `tsc` then you need to `npm run clean` before `npm run dev`.
 
-### Deploy
+### 提交
 
 ```bash
-npm run tsc
-npm start
+npm run commit
+
+```
+
+### CICD
+
+```bash
+npm run release
+
 ```
 
 ### Npm Scripts
